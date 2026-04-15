@@ -253,4 +253,3 @@ export const BUILDER_SYSTEM_PROMPT = `あなたはスライドJSON生成の専�
   },
   "slides": [ ... ]
 }`;
-`;
