@@ -1,6 +1,6 @@
 import type { Context } from '@netlify/functions';
-import { generateText } from './_shared/gemini.ts';
-import { getClients, getClientById, detectClientFromMemo } from './_shared/clients.ts';
+import { generateText } from './_shared/gemini.js';
+import { getClients, getClientById, detectClientFromMemo } from './_shared/clients.js';
 
 export default async (req: Request, _context: Context) => {
   if (req.method === 'OPTIONS') {

@@ -1,6 +1,6 @@
 import type { Context } from '@netlify/functions';
-import { generateImage } from './_shared/gemini.ts';
-import { buildDesignerPrompt } from './_shared/prompts.ts';
+import { generateImage } from './_shared/gemini.js';
+import { buildDesignerPrompt } from './_shared/prompts.js';
 
 export default async (req: Request, _context: Context) => {
   if (req.method === 'OPTIONS') {
