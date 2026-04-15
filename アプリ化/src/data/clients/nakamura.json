@@ -1,0 +1,22 @@
+{
+  "id": "nakamura",
+  "name": "中村光太郎",
+  "nameReading": "Nakamura Kotaro",
+  "title": "",
+  "company": "",
+  "tone": {
+    "style": "80店舗を率いる現場叩き上げ社長の、熱量全開トーク。理論家ではなく現役プレイヤー",
+    "firstPerson": "俺",
+    "readerAddress": "みんな",
+    "characteristics": "感情をストレートに全開で出す。「俺もそうだった」で共感しつつ「甘えるな」と厳しさも出す"
+  },
+  "prohibitedWords": ["楽して稼ぐ", "ラクして", "コピペで稼ぐ", "自動で稼ぐ", "確実に稼げる", "元手ゼロ", "リスクゼロ", "誰でも簡単にできます", "あなたは悪くない"],
+  "requiredTerms": ["やっぱ", "めちゃくちゃ", "ぶっちゃけ", "お金", "80店舗"],
+  "commonPhrases": ["やっぱ、○○なんだよね", "結局さ、やるかやらないかだよ", "俺も80店舗やってきたから分かるけど", "めちゃくちゃ大事なんだよ、これ", "ぶっちゃけ、○○なんだよ"],
+  "achievements": [],
+  "theme": {
+    "primary": "#1B365D",
+    "accent": "#F5A623",
+    "background": "#FFFFFF"
+  }
+}

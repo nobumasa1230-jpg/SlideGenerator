@@ -1,0 +1,78 @@
+{
+  "title": "AIで売れる仕組みを作る3つのステップ",
+  "theme": {
+    "primary": "#1E3A5F",
+    "secondary": "#1E3A5F",
+    "accent": "#7FB5D5",
+    "highlight": "#F0C850",
+    "text": "#FFFFFF",
+    "textDark": "#1E3A5F",
+    "background": "#FFFFFF",
+    "lightBg": "#D6E8F0"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "AIで売れる仕組みを作る3つのステップ",
+      "subtitle": "プロモーション型コピーライター　後藤 伸正"
+    },
+    {
+      "type": "text",
+      "title": "▶ 今日のテーマ",
+      "body": "「売れる仕組み」がないと、あなたのビジネスはいつまでも自転車操業のまま\n\n正直、僕もそうだった。毎月ゼロからお客さんを集めて、毎月ゼロから売上を作る。この構造を変えないと、どれだけ頑張っても楽にはならない。\n\n本質は、「売れ続ける設計図」を持っているかどうか。\n今日はその設計図を、AIを使って作る方法を3つのステップで伝えたい。"
+    },
+    {
+      "type": "process",
+      "title": "▶ 3つのステップ全体像",
+      "steps": [
+        {
+          "title": "STEP 1",
+          "description": "AIで「売れるコンセプト」を設計する"
+        },
+        {
+          "title": "STEP 2",
+          "description": "AIで「集客の仕組み」を自動化する"
+        },
+        {
+          "title": "STEP 3",
+          "description": "AIで「セールスの型」を量産する"
+        }
+      ]
+    },
+    {
+      "type": "checklist",
+      "title": "▶ STEP 1: AIで「売れるコンセプト」を設計する",
+      "items": [
+        { "text": "ターゲットの悩み・欲求のリサーチ", "checked": true },
+        { "text": "競合との差別化ポイントの抽出", "checked": true },
+        { "text": "「誰に・何を・なぜ今」の言語化", "checked": true },
+        { "text": "刺さるキャッチコピーの候補出し", "checked": true }
+      ]
+    },
+    {
+      "type": "checklist",
+      "title": "▶ STEP 2: AIで「集客の仕組み」を自動化する",
+      "items": [
+        { "text": "SNS投稿の自動生成と予約配信", "checked": true },
+        { "text": "LP（ランディングページ）のコピー作成", "checked": true },
+        { "text": "ステップメール／LINE配信シナリオの設計", "checked": true },
+        { "text": "広告クリエイティブの大量テスト", "checked": true }
+      ]
+    },
+    {
+      "type": "checklist",
+      "title": "▶ STEP 3: AIで「セールスの型」を量産する",
+      "items": [
+        { "text": "VSL（ビデオセールスレター）の台本作成", "checked": true },
+        { "text": "セールスページのコピーライティング", "checked": true },
+        { "text": "ウェビナーのスライド構成と台本", "checked": true },
+        { "text": "個別相談のトークスクリプト設計", "checked": true }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "仕組みを作るか、作らないか。\n決めるのは、あなたです。",
+      "message": "今日の3ステップをおさらいすると:\n1. AIで「売れるコンセプト」を設計する\n2. AIで「集客の仕組み」を自動化する\n3. AIで「セールスの型」を量産する\n\nこの3つを順番にやるだけで、売れる仕組みの設計図は完成する。\n想像してみてください。あなたが寝ている間にも、仕組みが働いて売上が生まれる世界を。\n\n詳しく知りたい方は概要欄のリンクから。"
+    }
+  ]
+}

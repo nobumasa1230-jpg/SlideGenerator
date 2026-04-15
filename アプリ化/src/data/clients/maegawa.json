@@ -1,0 +1,22 @@
+{
+  "id": "maegawa",
+  "name": "前川雅治",
+  "nameReading": "Maegawa Masaharu",
+  "title": "",
+  "company": "",
+  "tone": {
+    "style": "熱くて厳しいけど、根は優しい関西の兄貴。関西弁ベースの口語体",
+    "firstPerson": "僕",
+    "readerAddress": "先生",
+    "characteristics": "煽るが追い詰めない。自己開示で共感→解決策＋煽動の3ステップ"
+  },
+  "prohibitedWords": ["楽して稼ぐ", "不労所得", "簡単に儲かる", "誰でも簡単にできる", "非常に", "極めて", "大変", "ございます", "いたします", "弊社", "当社", "お客様", "ご検討ください"],
+  "requiredTerms": ["先生", "患者さん", "月商○万", "覚悟", "チャレンジ"],
+  "commonPhrases": ["覚悟を決めろ", "本気でやれ", "結果を出せ", "じゃないですか", "でも、、、本当にそれでいいんですか？", "先延ばしにしないでください"],
+  "achievements": [],
+  "theme": {
+    "primary": "#1B365D",
+    "accent": "#F5A623",
+    "background": "#FFFFFF"
+  }
+}

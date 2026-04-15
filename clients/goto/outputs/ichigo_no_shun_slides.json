@@ -1,0 +1,69 @@
+{
+  "title": "イチゴの旬、知ってますか？ ー元八百屋の豆知識ー",
+  "theme": {
+    "primary": "#1B365D",
+    "secondary": "#142D4F",
+    "accent": "#1B365D",
+    "highlight": "#F5A623",
+    "text": "#ffffff",
+    "textDark": "#333333",
+    "background": "#ffffff",
+    "lightBg": "#F0F4F8"
+  },
+  "slides": [
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE1",
+      "image_mime": "image/png"
+    },
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE2",
+      "image_mime": "image/png"
+    },
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE3",
+      "image_mime": "image/png"
+    },
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE4",
+      "image_mime": "image/png"
+    },
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE5",
+      "image_mime": "image/png"
+    },
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE6",
+      "image_mime": "image/png"
+    },
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE7",
+      "image_mime": "image/png"
+    },
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE8",
+      "image_mime": "image/png"
+    },
+    {
+      "type": "image_full",
+      "title": "",
+      "image_base64": "PLACEHOLDER_SLIDE9",
+      "image_mime": "image/png"
+    }
+  ]
+}

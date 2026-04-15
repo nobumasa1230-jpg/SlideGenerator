@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スライド作成ワークフロー</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    background: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .container {
+    width: 780px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    color: #2d3436;
+    margin-bottom: 32px;
+    font-weight: 700;
+  }
+
+  /* Nodes */
+  .node {
+    border-radius: 16px;
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+  }
+  .node-user {
+    background: #e8e8e8;
+    color: #2d3436;
+    width: 160px;
+    margin: 0 auto;
+  }
+  .node-commander {
+    background: #d5d5f5;
+    border: 2px solid #8b8bd4;
+    color: #2d3436;
+    width: 240px;
+    margin: 0 auto;
+    font-size: 17px;
+    padding: 18px 24px;
+  }
+  .node-agent {
+    background: #c8edd5;
+    border: 1px solid #7bc89a;
+    color: #2d3436;
+    width: 140px;
+    padding: 12px 16px;
+  }
+  .node-director {
+    background: #c8edd5;
+    border: 1px solid #7bc89a;
+    color: #2d3436;
+    width: 180px;
+    margin: 0 auto;
+    padding: 14px 20px;
+  }
+  .node-side {
+    background: #fde8c8;
+    border: 1.5px dashed #d4a054;
+    color: #8b6914;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Evaluator isolation wrapper */
+  .eval-isolation {
+    border: 2.5px dashed #c0392b;
+    border-radius: 20px;
+    padding: 16px 24px 12px;
+    position: relative;
+    display: inline-block;
+  }
+  .eval-isolation-label {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c0392b;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  .eval-isolation .node {
+    background: #fde8c8;
+    border: 1.5px solid #d4a054;
+    color: #2d3436;
+    width: 180px;
+    padding: 14px 20px;
+  }
+  .eval-note {
+    font-size: 11px;
+    color: #c0392b;
+    margin-top: 6px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* Arrows */
+  .arrow-down {
+    width: 2px;
+    height: 36px;
+    background: #3d7a5f;
+    margin: 0 auto;
+    position: relative;
+  }
+  .arrow-down::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: -5px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #3d7a5f;
+  }
+  .arrow-label {
+    font-size: 13px;
+    color: #555;
+    font-weight: 600;
+    margin-left: 12px;
+  }
+
+  /* Dashed arrow between director and evaluator */
+  .arrow-dashed-down {
+    width: 2px;
+    height: 28px;
+    border-left: 2.5px dashed #c0392b;
+    margin: 0 auto;
+    position: relative;
+  }
+  .arrow-dashed-down::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: -6px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #c0392b;
+  }
+  .arrow-transfer-label {
+    font-size: 11px;
+    color: #c0392b;
+    font-weight: 600;
+    text-align: center;
+    margin: 2px 0;
+  }
+
+  /* Layout helpers */
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+  }
+  .spacer { height: 8px; }
+
+  /* Agent row with fan-out lines */
+  .fan-out-section {
+    position: relative;
+    margin: 0 auto;
+    width: 480px;
+    height: 50px;
+  }
+  .fan-out-section svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Side connections */
+  .commander-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+  }
+  .side-left {
+    position: relative;
+  }
+  .side-left::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    width: 24px;
+    height: 2px;
+    border-top: 2px dashed #d4a054;
+  }
+  .side-right {
+    position: relative;
+  }
+  .side-right::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -24px;
+    width: 24px;
+    height: 2px;
+    border-top: 2px dashed #d4a054;
+  }
+
+  /* Agents row */
+  .agents-row {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+  }
+  .agent-box {
+    text-align: center;
+  }
+  .agent-sub {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* Summary box */
+  .summary {
+    background: #e6f7ed;
+    border-radius: 16px;
+    padding: 20px 28px;
+    margin-top: 28px;
+    border: 1.5px solid #b5dfc5;
+  }
+  .summary p {
+    font-size: 14px;
+    color: #2d3436;
+    line-height: 2;
+    font-weight: 500;
+  }
+  .summary .star {
+    color: #d4a054;
+    font-weight: 700;
+  }
+
+  /* Step labels */
+  .step-badge {
+    display: inline-block;
+    background: #3d7a5f;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 2px 10px;
+    margin-bottom: 6px;
+  }
+  .step-section {
+    text-align: center;
+    margin: 4px 0;
+  }
+
+  /* Fan out SVG arrows */
+  .fan-svg line {
+    stroke: #3d7a5f;
+    stroke-width: 2;
+  }
+  .fan-svg polygon {
+    fill: #3d7a5f;
+  }
+
+  /* Completion connections */
+  .eval-connections {
+    position: relative;
+    width: 480px;
+    height: 40px;
+    margin: 0 auto;
+  }
+  .eval-connections svg {
+    width: 100%;
+    height: 100%;
+  }
+  .eval-connections svg line {
+    stroke: #7bc89a;
+    stroke-width: 1.5;
+    stroke-dasharray: 6 4;
+  }
+
+  /* Step 7 evaluator in agents row */
+  .eval-final-isolation {
+    border: 2.5px dashed #c0392b;
+    border-radius: 16px;
+    padding: 12px 16px 8px;
+    position: relative;
+    display: inline-block;
+  }
+  .eval-final-isolation .eval-isolation-label {
+    top: -11px;
+  }
+  .eval-final-isolation .node-agent {
+    background: #fde8c8;
+    border-color: #d4a054;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>スライド作成チーム（ワークフロー）</h1>
+
+  <!-- User -->
+  <div class="row">
+    <div class="node node-user">ユーザー</div>
+  </div>
+
+  <!-- Arrow: メモ/指示 -->
+  <div class="row" style="height: 48px;">
+    <div style="display:flex; align-items:center;">
+      <div class="arrow-down"></div>
+      <span class="arrow-label">メモ / 指示</span>
+    </div>
+  </div>
+
+  <!-- Step 1-2 -->
+  <div class="step-section">
+    <span class="step-badge">Step 1-2</span>
+    <span style="font-size:12px; color:#666; margin-left:8px;">クライアント特定 → タスク判断</span>
+  </div>
+  <div class="spacer"></div>
+
+  <!-- Commander with side nodes -->
+  <div class="commander-row">
+    <div class="side-left">
+      <div class="node node-side">lessons.md</div>
+    </div>
+    <div class="node node-commander">CLAUDE.md<br>司令塔</div>
+    <div class="side-right">
+      <div class="node node-side">profile.md</div>
+    </div>
+  </div>
+
+  <!-- Step 3 arrow -->
+  <div class="step-section" style="margin-top: 12px;">
+    <span class="step-badge">Step 3</span>
+    <span style="font-size:12px; color:#666; margin-left:8px;">構成設計を依頼</span>
+  </div>
+  <div class="row" style="height: 36px;">
+    <div class="arrow-down"></div>
+  </div>
+
+  <!-- Director -->
+  <div class="row">
+    <div class="node node-director">
+      director
+      <div class="agent-sub">メモ → 構成案MD</div>
+    </div>
+  </div>
+
+  <!-- Step 4: dashed arrow + transfer label -->
+  <div class="step-section" style="margin-top: 10px;">
+    <span class="step-badge">Step 4</span>
+    <span style="font-size:12px; color:#666; margin-left:8px;">品質ゲート（最大3回）</span>
+  </div>
+  <div class="arrow-transfer-label">構成案のみ渡す（思考過程は共有しない）</div>
+  <div style="height: 36px;">
+    <div class="arrow-dashed-down"></div>
+  </div>
+
+  <!-- Evaluator in isolation wrapper -->
+  <div class="row">
+    <div class="eval-isolation">
+      <span class="eval-isolation-label">別コンテキストで起動（独立サブエージェント）</span>
+      <div class="node" style="border-radius:16px;">
+        evaluator
+        <div class="agent-sub" style="color:#8b6914;">構成案を100点満点で採点</div>
+      </div>
+      <div class="eval-note">director の思考過程を知らない状態で<br>客観的に品質を評価する</div>
+    </div>
+  </div>
+
+  <!-- Step 5 arrow -->
+  <div class="step-section" style="margin-top: 12px;">
+    <span class="step-badge">Step 5</span>
+    <span style="font-size:12px; color:#666; margin-left:8px;">ユーザー確認（テキスト全文を提示）</span>
+  </div>
+  <div class="row" style="height: 36px;">
+    <div class="arrow-down"></div>
+  </div>
+
+  <!-- Step 6 label -->
+  <div class="step-section">
+    <span class="step-badge">Step 6</span>
+    <span style="font-size:12px; color:#666; margin-left:8px;">並列起動</span>
+  </div>
+
+  <!-- Fan-out SVG -->
+  <div class="fan-out-section">
+    <svg class="fan-svg" viewBox="0 0 480 50">
+      <!-- Left line -->
+      <line x1="240" y1="0" x2="80" y2="40"/>
+      <polygon points="76,35 84,35 80,45"/>
+      <!-- Right line -->
+      <line x1="240" y1="0" x2="400" y2="40"/>
+      <polygon points="396,35 404,35 400,45"/>
+    </svg>
+  </div>
+
+  <!-- Two production agents -->
+  <div class="agents-row">
+    <div class="agent-box">
+      <div class="node node-agent">designer</div>
+      <div class="agent-sub">画像生成<br>(Gemini API)</div>
+    </div>
+    <div class="agent-box">
+      <div class="node node-agent">builder</div>
+      <div class="agent-sub">JSON → GAS<br>→ Google Slides</div>
+    </div>
+  </div>
+
+  <!-- Completion arrows to final evaluator -->
+  <div class="step-section" style="margin-top: 16px;">
+    <span class="step-badge">Step 7</span>
+    <span style="font-size:12px; color:#666; margin-left:8px;">最終チェック</span>
+  </div>
+  <div class="eval-connections" style="width:480px;">
+    <svg viewBox="0 0 480 40">
+      <line x1="80" y1="0" x2="240" y2="35"/>
+      <line x1="400" y1="0" x2="240" y2="35"/>
+    </svg>
+  </div>
+
+  <!-- Final evaluator in isolation wrapper -->
+  <div class="row">
+    <div class="eval-final-isolation">
+      <span class="eval-isolation-label">別コンテキストで起動（独立サブエージェント）</span>
+      <div class="node node-agent" style="background:#fde8c8; border-color:#d4a054; width:180px;">
+        evaluator
+      </div>
+      <div class="eval-note">完成スライドを独立した目で最終評価</div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <div class="row" style="margin-top: 8px;">
+    <div style="font-size:13px; color:#666; font-weight:600;">完了報告 → lessons.md に蓄積</div>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary">
+    <p><span class="star">★</span> 司令塔（CLAUDE.md）が全エージェントを自律的に指揮</p>
+    <p><span class="star">★</span> evaluator は独立サブエージェントとして起動 → 客観的な品質チェック</p>
+    <p><span class="star">★</span> 品質ゲートを構成案段階で入れ、画像生成の無駄を防止</p>
+    <p><span class="star">★</span> ユーザー確認でテキスト全文を提示し、認識ズレを排除</p>
+    <p><span class="star">★</span> 失敗が lessons.md に蓄積され再発防止</p>
+  </div>
+
+</div>
+</body>
+</html>

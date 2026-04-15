@@ -1,0 +1,22 @@
+{
+  "id": "uchida",
+  "name": "内田",
+  "nameReading": "Uchida",
+  "title": "",
+  "company": "",
+  "tone": {
+    "style": "",
+    "firstPerson": "",
+    "readerAddress": "",
+    "characteristics": ""
+  },
+  "prohibitedWords": [],
+  "requiredTerms": [],
+  "commonPhrases": [],
+  "achievements": [],
+  "theme": {
+    "primary": "#1B365D",
+    "accent": "#F5A623",
+    "background": "#FFFFFF"
+  }
+}
