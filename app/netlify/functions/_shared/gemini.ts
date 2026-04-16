@@ -44,7 +44,7 @@ export async function generateImage(prompt: string): Promise<{ base64: string; m
   const fullPrompt = systemPrompt + '\n\nCreate an infographic about: ' + prompt;
 
   const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.0-flash-exp',
     contents: [{ role: 'user' as const, parts: [{ text: fullPrompt }] }],
     config: {
       responseModalities: ['IMAGE', 'TEXT'],
